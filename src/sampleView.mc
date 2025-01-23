@@ -10,6 +10,7 @@ class sampleView extends WatchUi.WatchFace {
     hidden var front = WatchUi.loadResource(Rez.Fonts.Front);
     hidden var back = WatchUi.loadResource(Rez.Fonts.Back);
     hidden var backOutline = WatchUi.loadResource(Rez.Fonts.BackOutline);
+    hidden var frontOutline = WatchUi.loadResource(Rez.Fonts.FrontOutline);
 
     function initialize(wfApp) {
         WatchFace.initialize();
@@ -65,6 +66,9 @@ class sampleView extends WatchUi.WatchFace {
 
         dc.setColor(Application.Properties.getValue("Yellow") as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+
+        // dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        // dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, frontOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.

@@ -3,4 +3,5 @@
     <font id="Front" filename="../resources/fonts/Front.fnt" antialias="true"/>
     <font id="Back" filename="../resources/fonts/Back.fnt" antialias="true"/>
     <font id="BackOutline" filename="../resources/fonts/BackOutline.fnt" antialias="true"/>
+    <font id="FrontOutline" filename="../resources/fonts/FrontOutline.fnt" antialias="true"/>
 </resources>
