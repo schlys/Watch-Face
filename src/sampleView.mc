@@ -12,6 +12,8 @@ class sampleView extends WatchUi.WatchFace {
     hidden var backOutline = WatchUi.loadResource(Rez.Fonts.BackOutline);
     hidden var frontOutline = WatchUi.loadResource(Rez.Fonts.FrontOutline);
 
+    hidden var _lowPower = false;
+
     function initialize(wfApp) {
         WatchFace.initialize();
     }
@@ -36,7 +38,11 @@ class sampleView extends WatchUi.WatchFace {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
         dc.clear();
 
-        // Get the current time and format it correctly
+        drawTime(dc);
+    }
+
+    // Draw the time
+    private function drawTime(dc as Dc) as Void {
         var timeFormat = "$1$:$2$";
         var clockTime = System.getClockTime();
         var hours = clockTime.hour;
@@ -52,13 +58,7 @@ class sampleView extends WatchUi.WatchFace {
         }
         var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
 
-        // Update the view
-        // var view = View.findDrawableById("TimeLabel") as Text;
-        // // view.setFont(CrackMan);
-        // view.setColor(Application.Properties.getValue("ForegroundColor") as Number);
-        // view.setText(timeString);
-
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(Application.Properties.getValue("Red") as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
@@ -66,17 +66,16 @@ class sampleView extends WatchUi.WatchFace {
 
         dc.setColor(Application.Properties.getValue("Yellow") as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
-
-        // dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        // dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, frontOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
+        _lowPower = false;
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+        _lowPower = true;
     }
  
 }

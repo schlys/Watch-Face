@@ -4,7 +4,7 @@ import Toybox.WatchUi;
 
 class sampleApp extends Application.AppBase {
 
-    hidden var _watchFaceVar;
+    hidden var _watchFace;
 
     function initialize() {
         AppBase.initialize();
@@ -20,9 +20,9 @@ class sampleApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        _watchFaceVar = new sampleView(self);
+        _watchFace = new sampleView(self);
 
-        return [ _watchFaceVar, new PowerBudgetDelegate() ];
+        return [ _watchFace, new PowerBudgetDelegate() ];
     }
 
     // New app settings have been received so trigger a UI update
