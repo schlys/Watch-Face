@@ -2,7 +2,7 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class sampleApp extends Application.AppBase {
+class App extends Application.AppBase {
 
     hidden var _watchFace;
 
@@ -20,18 +20,19 @@ class sampleApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        _watchFace = new sampleView(self);
+        _watchFace = new View(self);
 
         return [ _watchFace, new PowerBudgetDelegate() ];
     }
 
     // New app settings have been received so trigger a UI update
     function onSettingsChanged() as Void {
+        _watchFace.onSettingsChanged();
         WatchUi.requestUpdate();
     }
 
 }
 
-function getApp() as sampleApp {
-    return Application.getApp() as sampleApp;
+function getApp() as App {
+    return Application.getApp() as App;
 }

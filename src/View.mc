@@ -4,7 +4,7 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 
-class sampleView extends WatchUi.WatchFace {
+class View extends WatchUi.WatchFace {
 
     hidden var CrackMan = WatchUi.loadResource(Rez.Fonts.CrackMan);
     hidden var front = WatchUi.loadResource(Rez.Fonts.Front);
@@ -13,6 +13,8 @@ class sampleView extends WatchUi.WatchFace {
     hidden var frontOutline = WatchUi.loadResource(Rez.Fonts.FrontOutline);
 
     hidden var _lowPower = false;
+
+    hidden var _settingsCache = new SettingsCache();
 
     function initialize(wfApp) {
         WatchFace.initialize();
@@ -51,21 +53,25 @@ class sampleView extends WatchUi.WatchFace {
                 hours = hours - 12;
             }
         } else {
-            if (Application.Properties.getValue("UseMilitaryFormat")) {
+            if (_settingsCache.useMilitaryFormat) {
                 timeFormat = "$1$$2$";
                 hours = hours.format("%02d");
             }
         }
         var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
 
-        dc.setColor(Application.Properties.getValue("Red") as Number, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(_settingsCache.timeBackColor as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, backOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.setColor(Application.Properties.getValue("Yellow") as Number, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(_settingsCache.timeFrontColor as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+    }
+
+    function onSettingsChanged() as Void {
+        _settingsCache = new SettingsCache();
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.
