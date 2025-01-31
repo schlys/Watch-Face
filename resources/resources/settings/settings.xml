@@ -31,4 +31,10 @@
         <settingConfig type="boolean" />
     </setting>
 
+    <setting propertyKey="@Properties.StatRecord" title="@Strings.StatRecordTitle">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.Calories</listEntry>
+        </settingConfig>
+    </setting>
+
 </settings>

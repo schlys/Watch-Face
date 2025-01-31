@@ -14,7 +14,13 @@ class View extends WatchUi.WatchFace {
 
     hidden var _lowPower = false;
 
+    hidden var _storage = new Storage();
     hidden var _settingsCache = new SettingsCache();
+
+    private var _functions = {
+        "0" => :getRecordSteps,
+        "1" => :getRecordCalories
+    };
 
     function initialize(wfApp) {
         WatchFace.initialize();
@@ -32,7 +38,9 @@ class View extends WatchUi.WatchFace {
     // }
 
     function onPartialUpdate(dc) as Void {
-        onUpdate(dc);
+        if (_lowPower) {
+            return;
+        }
     }
 
     // Update the view
@@ -41,6 +49,8 @@ class View extends WatchUi.WatchFace {
         dc.clear();
 
         drawTime(dc);
+
+        System.println("printing stat: " + _storage.method(_functions[_settingsCache.statRecord.toString()]).invoke());
     }
 
     // Draw the time

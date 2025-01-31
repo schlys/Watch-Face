@@ -4,6 +4,7 @@
 
     <string id="BackgroundColorTitle">Background Color</string>
     <string id="MilitaryFormatTitle">Military Format for 24 Hour Time</string>
+    <string id="StatRecordTitle">Stat Record to Beat</string>
     <string id="TimeFrontColorTitle">Time Front Color</string>
     <string id="TimeBackColorTitle">Time Back Color</string>
 
@@ -13,5 +14,7 @@
     <string id="ColorWhite">White</string>
     <string id="ColorBlue">Blue</string>
     <string id="ColorRed">Red</string>
+
+    <string id="Calories">Calories</string>
 
 </strings>

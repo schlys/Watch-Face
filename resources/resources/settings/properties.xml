@@ -6,4 +6,6 @@
     <property id="TimeFrontColor" type="number">0xF8E71C</property>
     <property id="TimeBackColor" type="number">0xD52B07</property>
 
+    <property id="StatRecord" type="number">0</property>
+
 </properties>

@@ -1,24 +1,24 @@
 import Toybox.Lang;
-import Toybox.Application;
+import Toybox.Application.Storage;
 
 // Holds stored properties set progromatically
 class Storage {
-    private function initialize() {}
+    function initialize() {}
 
-    static function getRecordSteps() {
+    function getRecordSteps() {
         return getStorageValue("recordSteps");
     }
 
-    static function getRecordCalories() {
+    function getRecordCalories() {
         return getStorageValue("recordCalories");
     }
 
-    private static function getStorageValue(key as String) {
+    private function getStorageValue(key as String) {
         var value = Storage.getValue(key);
         return value ? value : 0;
     }
 
-    private static function setStorageValue(key as String, value) {
+    private function setStorageValue(key as String, value) {
         Storage.setValue(key, value);
     }
 }
