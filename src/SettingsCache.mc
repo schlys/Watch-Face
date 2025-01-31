@@ -1,3 +1,4 @@
+// holds settings values set by the user
 class SettingsCache {
     public var useMilitaryFormat;
     public var timeFrontColor;
