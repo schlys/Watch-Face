@@ -14,7 +14,7 @@ class View extends WatchUi.WatchFace {
 
     hidden var _lowPower = false;
 
-    hidden var _storage = new Storage();
+    // hidden var _storage = new Storage();
     hidden var _settingsCache = new SettingsCache();
 
     private var _stats as Dictionary<Number, Stat> = {
@@ -50,7 +50,7 @@ class View extends WatchUi.WatchFace {
 
         drawTime(dc);
 
-        System.println("printing stat: " + _stats[_settingsCache.statRecord].getRecord(_storage));
+        System.println("printing stat: " + _stats[_settingsCache.statRecord].getRecord());
     }
 
     // Draw the time
