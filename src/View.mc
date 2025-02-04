@@ -17,10 +17,10 @@ class View extends WatchUi.WatchFace {
     hidden var _storage = new Storage();
     hidden var _settingsCache = new SettingsCache();
 
-    private var _functions = {
-        "0" => :getRecordSteps,
-        "1" => :getRecordCalories
-    };
+    private var _stats as Dictionary<Number, Stat> = {
+        0 => new Steps(),
+        1 => new Calories()
+    } as Dictionary<Number, Stat>;
 
     function initialize(wfApp) {
         WatchFace.initialize();
@@ -50,7 +50,7 @@ class View extends WatchUi.WatchFace {
 
         drawTime(dc);
 
-        System.println("printing stat: " + _storage.method(_functions[_settingsCache.statRecord.toString()]).invoke());
+        System.println("printing stat: " + _stats[_settingsCache.statRecord].getRecord(_storage));
     }
 
     // Draw the time
