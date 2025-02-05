@@ -14,15 +14,13 @@ class View extends WatchUi.WatchFace {
 
     hidden var _lowPower = false;
 
-    // hidden var _storage = new Storage();
-    hidden var _settingsCache = new SettingsCache();
-
     private var _stats as Dictionary<Number, Stat> = {
         0 => new Steps(),
         1 => new Calories()
     } as Dictionary<Number, Stat>;
 
     function initialize(wfApp) {
+        SettingsCache.refresh();
         WatchFace.initialize();
     }
 
@@ -50,7 +48,7 @@ class View extends WatchUi.WatchFace {
 
         drawTime(dc);
 
-        System.println("printing stat: " + _stats[_settingsCache.statRecord].getRecord());
+        System.println("printing stat: " + _stats[SettingsCache.statRecord].getRecord());
     }
 
     // Draw the time
@@ -63,25 +61,25 @@ class View extends WatchUi.WatchFace {
                 hours = hours - 12;
             }
         } else {
-            if (_settingsCache.useMilitaryFormat) {
+            if (SettingsCache.useMilitaryFormat) {
                 timeFormat = "$1$$2$";
                 hours = hours.format("%02d");
             }
         }
         var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
 
-        dc.setColor(_settingsCache.timeBackColor as Number, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(SettingsCache.timeBackColor as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, backOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.setColor(_settingsCache.timeFrontColor as Number, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(SettingsCache.timeFrontColor as Number, Graphics.COLOR_TRANSPARENT);
         dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function onSettingsChanged() as Void {
-        _settingsCache = new SettingsCache();
+        SettingsCache.refresh();
     }
 
     // The user has just looked at their watch. Timers and animations may be started here.

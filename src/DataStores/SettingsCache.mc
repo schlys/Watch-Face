@@ -1,12 +1,14 @@
+import Toybox.Application;
+
 // holds settings values set by the user
 class SettingsCache {
-    public var useMilitaryFormat;
-    public var timeFrontColor;
-    public var timeBackColor;
-    public var backgroundColor;
-    public var statRecord;
+    public static var useMilitaryFormat;
+    public static var timeFrontColor;
+    public static var timeBackColor;
+    public static var backgroundColor;
+    public static var statRecord;
 
-    function initialize() {
+    static function refresh() {
         useMilitaryFormat = Application.Properties.getValue("UseMilitaryFormat");
         timeFrontColor = Application.Properties.getValue("TimeFrontColor");
         timeBackColor = Application.Properties.getValue("TimeBackColor");
