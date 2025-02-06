@@ -1,6 +1,6 @@
 import Toybox.Application;
 
-// holds settings values set by the user
+// holds settings values set by the user, using static for performance
 class SettingsCache {
     public static var useMilitaryFormat;
     public static var timeFrontColor;

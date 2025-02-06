@@ -11,10 +11,9 @@ class View extends WatchUi.WatchFace {
     hidden var back = WatchUi.loadResource(Rez.Fonts.Back);
     hidden var backOutline = WatchUi.loadResource(Rez.Fonts.BackOutline);
     hidden var frontOutline = WatchUi.loadResource(Rez.Fonts.FrontOutline);
-
     hidden var _lowPower = false;
 
-    private var _stats as Dictionary<Number, Stat> = {
+    hidden var _stats as Dictionary<Number, Stat> = {
         0 => new Steps(),
         1 => new Calories()
     } as Dictionary<Number, Stat>;
@@ -32,8 +31,8 @@ class View extends WatchUi.WatchFace {
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
-    // function onShow() as Void {
-    // }
+    function onShow() as Void {
+    }
 
     function onPartialUpdate(dc) as Void {
         if (_lowPower) {
