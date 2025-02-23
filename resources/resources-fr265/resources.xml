@@ -1,7 +1,10 @@
 <resources>
-    <font id="CrackMan" filename="../resources/fonts/CrackMan.fnt" antialias="true"/>
     <font id="Front" filename="../resources/fonts/Front.fnt" antialias="true"/>
     <font id="Back" filename="../resources/fonts/Back.fnt" antialias="true"/>
     <font id="BackOutline" filename="../resources/fonts/BackOutline.fnt" antialias="true"/>
     <font id="FrontOutline" filename="../resources/fonts/FrontOutline.fnt" antialias="true"/>
+
+    <bitmap id="Walls" filename="drawables/Walls.png" packingFormat="png"/>
+    <bitmap id="Borders" filename="drawables/Borders.png" packingFormat="png"/>
+    <bitmap id="Entrance" filename="drawables/Entrance.png" packingFormat="png"/>
 </resources>

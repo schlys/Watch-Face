@@ -6,11 +6,15 @@ import Toybox.WatchUi;
 
 class View extends WatchUi.WatchFace {
 
-    hidden var CrackMan = WatchUi.loadResource(Rez.Fonts.CrackMan);
     hidden var front = WatchUi.loadResource(Rez.Fonts.Front);
     hidden var back = WatchUi.loadResource(Rez.Fonts.Back);
     hidden var backOutline = WatchUi.loadResource(Rez.Fonts.BackOutline);
     hidden var frontOutline = WatchUi.loadResource(Rez.Fonts.FrontOutline);
+
+    hidden var walls = Application.loadResource(Rez.Drawables.Walls) as BitmapResource;
+    hidden var borders = Application.loadResource(Rez.Drawables.Borders) as BitmapResource;
+    hidden var entrance = Application.loadResource(Rez.Drawables.Entrance) as BitmapResource;
+
     hidden var _lowPower = false;
 
     hidden var _stats as Dictionary<Number, Stat> = {
@@ -42,8 +46,16 @@ class View extends WatchUi.WatchFace {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
         dc.clear();
+
+        dc.drawBitmap2( 0, 0, walls, { :tintColor => 0x10C6F4 });
+
+        // dc.drawBitmap2( 0, 0, borders, { :tintColor => 0x1323bf } );
+        dc.drawBitmap2( 0, 0, borders, { :tintColor => 0xfcf222  } );
+        // dc.drawBitmap2( 0, 0, borders, { :tintColor => Graphics.COLOR_YELLOW } );
+
+        dc.drawBitmap2( 0, 0, entrance, { :tintColor => 0xdd56c3 } );
 
         drawTime(dc);
 
@@ -68,13 +80,13 @@ class View extends WatchUi.WatchFace {
         var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
 
         dc.setColor(SettingsCache.timeBackColor as Number, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.1, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, backOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+        // dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        // dc.drawText(dc.getWidth()/2,dc.getHeight()/2.1, backOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
         dc.setColor(SettingsCache.timeFrontColor as Number, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.06, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.1, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function onSettingsChanged() as Void {
