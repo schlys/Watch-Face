@@ -14,6 +14,7 @@ class View extends WatchUi.WatchFace {
     hidden var walls = Application.loadResource(Rez.Drawables.Walls) as BitmapResource;
     hidden var borders = Application.loadResource(Rez.Drawables.Borders) as BitmapResource;
     hidden var entrance = Application.loadResource(Rez.Drawables.Entrance) as BitmapResource;
+    hidden var dots = Application.loadResource(Rez.Drawables.Dots) as BitmapResource;
 
     hidden var _lowPower = false;
 
@@ -52,10 +53,12 @@ class View extends WatchUi.WatchFace {
         dc.drawBitmap2( 0, 0, walls, { :tintColor => 0x10C6F4 });
 
         // dc.drawBitmap2( 0, 0, borders, { :tintColor => 0x1323bf } );
-        dc.drawBitmap2( 0, 0, borders, { :tintColor => 0xfcf222  } );
-        // dc.drawBitmap2( 0, 0, borders, { :tintColor => Graphics.COLOR_YELLOW } );
+        // dc.drawBitmap2( 0, 0, borders, { :tintColor => 0xfcf222  } );
+        dc.drawBitmap2( 0, 0, borders, { :tintColor => 0xFFFFFF } );
 
         dc.drawBitmap2( 0, 0, entrance, { :tintColor => 0xdd56c3 } );
+
+        dc.drawBitmap2( 0, 0, dots, { :tintColor => 0xFFFFFF } );
 
         drawTime(dc);
 
@@ -80,13 +83,16 @@ class View extends WatchUi.WatchFace {
         var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
 
         dc.setColor(SettingsCache.timeBackColor as Number, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.1, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+        // dc.setColor(0x10C6F4, Graphics.COLOR_TRANSPARENT);
+        dc.drawText(dc.getWidth()/2.03,dc.getHeight()/2.1, back, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
         // dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
         // dc.drawText(dc.getWidth()/2,dc.getHeight()/2.1, backOutline, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
 
         dc.setColor(SettingsCache.timeFrontColor as Number, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(dc.getWidth()/2,dc.getHeight()/2.1, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
+        // dc.setColor(0x1323bf, Graphics.COLOR_TRANSPARENT);
+        // use 2.005 for width on big border
+        dc.drawText(dc.getWidth()/2.03,dc.getHeight()/2.1, front, timeString, Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function onSettingsChanged() as Void {
